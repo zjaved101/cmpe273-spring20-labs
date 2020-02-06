@@ -1,0 +1,5 @@
+bash-3.2$ time python async_ext_merge_sort.py
+
+real	0m0.146s
+user	0m0.080s
+sys	0m0.052s
