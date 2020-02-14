@@ -2,12 +2,6 @@ from flask import Flask, escape, request, jsonify
 
 app = Flask(__name__)
 
-# STUDENTS = {
-#     "0": "John Doe",
-#     "1": "Mary Doe",
-#     "2": "Bob Doe",
-# }
-# STUDENTCOUNT = 3
 STUDENTS = ['John Doe', 'Mary Doe', 'Bob Doe']
 CLASSES = {}
 CLASSID = 0
@@ -19,8 +13,6 @@ def hello():
 
 @app.route('/students', methods = ['POST'])
 def createStudent():
-    # STUDENTS[STUDENTCOUNT] = request.form['name']
-    # STUDENTCOUNT += 1
     STUDENTS.append(request.form['name'])
     return jsonify({
         'id' : str(len(STUDENTS) - 1),
@@ -29,7 +21,6 @@ def createStudent():
 
 @app.route('/students/<id>', methods = ['GET'])
 def getStudents(id):
-    # return "You're at the students: {} GET ROUTE".format(id)
     return jsonify({
         'id': id,
         'name': STUDENTS[int(id)],
