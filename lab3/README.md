@@ -13,57 +13,22 @@ pip install pipenv
 ```
 pipenv install flask==1.1.1
 ```
-* Install _[Graphene](https://graphene-python.org/)_ and [Flask GraphQL](https://github.com/graphql-python/flask-graphql) for handling GraphQL schema and binding.
+* Install _[Ariadne](https://ariadnegraphql.org/docs/flask-integration.html)_ for handling GraphQL schema and binding.
 
 ```
-pipenv install graphene==2.1.8
-pipenv install flask-graphql==2.0.1
+pipenv install ariadne==0.10.0
 ```
 
 * Create a schema.py and add this code:
 
 ```python
-from graphene import ObjectType, String, Boolean, ID, Field, Int, List
-
-
-class Student(ObjectType):
-    id = ID()
-    name = String()
-
-# List view of <any> objects
-class Query(ObjectType):
-    students = List(Student, id=Int(required=True))
-
-    def resolve_students(self, args, context, info):
-        students = [ { "name": "fix" }, { "name": "me" }]
-        return students
-
-schema = graphene.Schema(query=Query)
-
-def test():
-    query = '''
-        query students {
-            name
-        }
-    '''
-    result = schema.execute(query)
-    print(f"result={result}")
+TBD
 ```
 
 * Create a file called _app.py_ and add this code snippet.
 
 ```python
 from flask import Flask, escape, request
-from schema import Query
-from flask_graphql import GraphQLView
-from graphene import Schema
-
-view_func = GraphQLView.as_view(
-    'graphql', schema=Schema(query=Query), graphiql=True)
-
-
-app = Flask(__name__)
-app.add_url_rule('/graphql', view_func=view_func)
 
 @app.route('/')
 def hello():
