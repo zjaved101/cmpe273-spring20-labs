@@ -54,7 +54,6 @@ def resolve_classes(_, info, id):
             'name' : student
     })
     return {'id': id, 'name': CLASSES[int(id)]['name'], 'students': students }
-    # return CLASSES[int(id)]
 
 @mutation.field('createStudent')
 def resolve_createStudent(_, info, name):
