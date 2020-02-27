@@ -47,7 +47,14 @@ def resolve_student(_, info, id):
 
 @query.field('classes')
 def resolve_classes(_, info, id):
-    return CLASSES[int(id)]
+    students = []
+    for student in CLASSES[int(id)]['students']:
+        students.append({
+            'id' : STUDENTS.index(student),
+            'name' : student
+    })
+    return {'id': id, 'name': CLASSES[int(id)]['name'], 'students': students }
+    # return CLASSES[int(id)]
 
 @mutation.field('createStudent')
 def resolve_createStudent(_, info, name):
